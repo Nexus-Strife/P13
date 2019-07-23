@@ -1,5 +1,6 @@
 configparser==3.7.4
 Django==2.2.3
+django-summernote==0.8.11.4
 mysql-connector-python==8.0.16
 protobuf==3.9.0
 psycopg2==2.8.3
