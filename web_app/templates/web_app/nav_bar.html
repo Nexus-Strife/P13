@@ -27,11 +27,27 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'web_app:contact' %}">Contact</a>
                 </li>
+
+                {% if not user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{% url 'web_app:login' %}">Se connecter</a>
+                </li>
+                {% else %}
+
+                <li class="nav-item">
+                    <a class="nav-link" href="">Bienvenue <u>{{ user }}</u> !</a>
+                {% endif %}
+
+                {% if not user.is_authenticated %}
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'web_app:register' %}">S'enregistrer</a>
                 </li>
+                {% else %}
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'web_app:login' %}">Se connecter</a>
+                    <a class="nav-link" href="{% url 'web_app:logout' %}">Déconnexion</a>
+                </li>
+                {% endif %}
+
                 </li>
             </ul>
         </div>

@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>S'enregistrer</title>
+    <title>Rédaction de l'article</title>
 
     <!-- Bootstrap core CSS -->
     <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
@@ -32,65 +32,40 @@
 {% endblock %}
 
 <!-- Page Header -->
-<header class="masthead" style="background-image: url({% static 'img/register-bg.jpg' %})">
+<header class="masthead" style="background-image: url({% static 'img/home-bg.jpg' %})">
     <div class="overlay"></div>
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-md-10 mx-auto">
-                <div class="page-heading">
-                    <h1>Enregistrement.</h1>
-                    <span class="subheading">Veuillez completer le formulaire d'enregistrement.</span>
+                <div class="site-heading">
+                    <h1>Clean Blog</h1>
+                    <span class="subheading">A Blog Theme by Start Bootstrap</span>
                 </div>
             </div>
         </div>
     </div>
 </header>
 
-<!-- Main Content -->
 <div class="container">
-     <div class="row">
-           <div class="col-xs-6 col-sm-6 col-md-6 col-sm-offset-2 col-md-offset-4 col-lg-offset-12" id="panel_reg">
-                <div class="panel panel-default">
-                    <div class="panel-heading">
-                        <h3 class="panel-title" id="panel_title">Enregistez-vous !</h3>
-                    </div>
-                    <div class="panel-body">
-                        <form role="form" method="post" action="">
-                            {% csrf_token %}
-                            <div class="row">
-                                <div class="col-xs-6 col-sm-6 col-md-6">
-                                    <div class="form-group">
-                                        {{ form.first_name }}
-                                    </div>
-                                </div>
-                                <div class="col-xs-6 col-sm-6 col-md-6">
-                                    <div class="form-group">
-                                        {{ form.last_name }}
-                                    </div>
-                                </div>
-                                <div class="col-xs-6 col-sm-6 col-md-12">
-                                    <div class="form-group">
-                                        {{ form.nickname }}
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                {{ form.email }}
-                            </div>
-                            <div class="row">
-                                <div class="col-xs-6 col-sm-8 col-md-12 col-lg-12">
-                                    <div class="form-group">
-                                        {{ form.password }}
-                                    </div>
-                                </div>
-                            </div>
-                                <input type="submit" value="S'enregistrer !" class="btn btn-info btn-block">
-                        </form>
-                    </div>
-                </div>
+    <form role="form" method="post" action="">
+        <div class="row">
+            {% csrf_token %}
+            <div class="col-lg-8 col-md-10 offset-lg-2">
+                {{ formTitle.title }}
+            </div>
+            <div>
+                <p></p>
+            </div>
+            <div class="col-lg-8 col-md-10 offset-lg-2">
+                {{ form.foo }}
             </div>
         </div>
-    </div>
+        <div class="row">
+            <div class="col-lg-2 col-md-10 offset-lg-4">
+                <input type="submit" value="Enregistrer" class="btn btn-info btn-block">
+            </div>
+        </div>
+    </form>
 </div>
 
 <hr>
@@ -135,10 +110,6 @@
 <!-- Bootstrap core JavaScript -->
 <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
 <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
-
-<!-- Contact Form JavaScript -->
-<script src="{% static 'js/jqBootstrapValidation.js' %}"></script>
-<script src="{% static 'js/contact_me.js' %}"></script>
 
 <!-- Custom scripts for this template -->
 <script src="{% static 'js/clean-blog.min.js' %}"></script>
