@@ -26,7 +26,7 @@ class RegisterForm(forms.Form):
 
 
 class CommentsForm(forms.Form):
-    bodytxt = forms.CharField(label="Commentaire", max_length=255, widget=forms.Textarea(attrs={'placeholder': 'Ecrivez votre commentaire', 'class': 'form-control'}))
+    bodytxt = forms.CharField(label="Commentaire", max_length=255, widget=forms.Textarea(attrs={'placeholder': 'Ajoutez un commentaire', 'class': 'form-control'}))
 
 
 class TitleForm(forms.Form):

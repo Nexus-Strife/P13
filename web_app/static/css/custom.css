@@ -1,0 +1,27 @@
+.crop {
+width: 570px;
+overflow: hidden;
+height: 60px;
+white-space: nowrap; /* Don't forget this one */
+text-overflow: ellipsis;
+display: inline-block;
+}​
+
+
+.sub {
+width: 570px;
+overflow: hidden;
+height: 70px;
+white-space: nowrap; /* Don't forget this one */
+text-overflow: ellipsis;
+display: inline-block;
+}​
+
+.cbtn {
+    font-size: 14px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    border-radius: 0;
+    font-family: 'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif;
+}

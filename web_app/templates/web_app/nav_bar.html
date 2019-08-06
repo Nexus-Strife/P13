@@ -6,23 +6,13 @@
 <body>
 <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
     <div class="container">
-        <a class="navbar-brand" href="{% url 'web_app:index' %}">Start Bootstrap</a>
-        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
-                data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
-                aria-label="Toggle navigation">
-            Menu
-            <i class="fas fa-bars"></i>
-        </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'web_app:index' %}">Home</a>
+                    <a class="nav-link" href="{% url 'web_app:index' %}">Accueil</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'web_app:about' %}">About</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'web_app:post' %}">Sample Post</a>
+                    <a class="nav-link" href="{% url 'web_app:about' %}">À propos</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'web_app:contact' %}">Contact</a>
@@ -35,7 +25,7 @@
                 {% else %}
 
                 <li class="nav-item">
-                    <a class="nav-link" href="">Bienvenue <u>{{ user }}</u> !</a>
+                    <a class="nav-link" href="{% url 'web_app:profil' %}">Bienvenue <u>{{ user }}</u> !</a>
                 {% endif %}
 
                 {% if not user.is_authenticated %}
@@ -47,7 +37,6 @@
                     <a class="nav-link" href="{% url 'web_app:logout' %}">Déconnexion</a>
                 </li>
                 {% endif %}
-
                 </li>
             </ul>
         </div>

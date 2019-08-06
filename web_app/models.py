@@ -16,6 +16,6 @@ class Comments(models.Model):
     art_id = models.IntegerField()
 
 
-class FavArt(models.Model):
+class Favs(models.Model):
     art_id = models.IntegerField()
     user_id = models.IntegerField()

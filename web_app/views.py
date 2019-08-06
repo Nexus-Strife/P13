@@ -4,15 +4,24 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 from django.contrib.auth import login as log
 from django.contrib.auth import logout as out
-from .models import Arts
+from .models import Arts, Comments, Favs
 from datetime import date
+from django.core.paginator import Paginator
+from django.http import JsonResponse
 
 
 # Create your views here.
 
 
 def index(request):
-    return render(request, "web_app/index.html", locals())
+    lst_art = Arts.objects.raw("SELECT waa.id, txt, title, auth_user.username FROM web_app_arts waa "
+                               "LEFT JOIN auth_user on waa.user_id = auth_user.id")
+
+    paginator = Paginator(lst_art, 5)  # Show 5 art per page
+
+    page = request.GET.get('page')
+    articles = paginator.get_page(page)
+    return render(request, 'web_app/index.html', {'articles': articles})
 
 
 def post_art(request):
@@ -92,7 +101,7 @@ def write_art(request):
             today = date.today()
             saveArt = Arts(txt=text, title=titl, user_id=current_user.id, date=today)
             saveArt.save()
-            return render(request, 'web_app/index.html', locals())
+            return redirect('../', locals())
         else:
             form = SomeForm()
             formTitle = TitleForm()
@@ -101,4 +110,59 @@ def write_art(request):
         form = SomeForm()
         formTitle = TitleForm()
     return render(request, "web_app/write_art.html", locals())
+
+
+def view_art(request, article):
+
+    formCom = CommentsForm()
+    reading_art = Arts.objects.filter(title__iexact=article).first()
+    usr = Arts.objects.raw("SELECT au.id, username FROM auth_user au "
+                           "LEFT JOIN web_app_arts ON au.id = web_app_arts.user_id WHERE web_app_arts.title = %s", (article, ))[0]
+    lst_comm = Comments.objects.raw("SELECT wac.id, comments, auth_user.username FROM web_app_comments wac "
+                                    "LEFT JOIN web_app_arts p ON p.id = wac.art_id "
+                                    "INNER JOIN auth_user on wac.user_id = auth_user.id WHERE wac.art_id = %s", (reading_art.id, ))
+    return render(request, "web_app/post.html", locals())
+
+
+def add_comm(request, article):
+    if request.method == 'POST':
+        form_com = CommentsForm(request.POST)
+        if form_com.is_valid():
+            current_user = request.user
+            comment = form_com.cleaned_data['bodytxt']
+            art_id = Arts.objects.raw("SELECT id FROM web_app_arts WHERE title = %s", (article, ))[0]
+            com = Comments(comments=comment, user_id=current_user.id, art_id=art_id.id)
+            com.save()
+            return redirect('../../view_art/' + article + '/')
+        else:
+            form_com = CommentsForm()
+    else:
+        pass
+
+
+def add_fav(request):
+    current_user = request.user
+    id = request.GET.get('value')
+    fav = Favs(art_id=id, user_id=current_user.id)
+    fav.save()
+    data = {'respond': id}
+    return JsonResponse(data)
+
+
+def profil(request):
+    current_user = request.user
+
+    lst_fav = Favs.objects.raw("SELECT web_app_favs.id, art_id, web_app_favs.user_id,"
+                               " web_app_arts.title, web_app_arts.txt FROM web_app_favs "
+                               "LEFT JOIN web_app_arts ON art_id = web_app_arts.id WHERE web_app_favs.user_id = %s", (current_user.id, ))
+
+    return render(request, 'web_app/profil.html', locals())
+
+
+def del_fav(request):
+    id = request.GET.get('value')
+    Favs.objects.filter(id=id).delete()
+    data = {'respond': id}
+    return JsonResponse(data)
+
 
