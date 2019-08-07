@@ -5,6 +5,7 @@ from django.db import models
 
 class Arts(models.Model):
     txt = models.TextField()
+    preview = models.TextField(max_length=500)
     title = models.CharField(max_length=255)
     user_id = models.IntegerField()
     date = models.DateField()

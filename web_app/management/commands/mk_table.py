@@ -14,7 +14,7 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         cmds = [
             """CREATE TABLE IF NOT EXISTS web_app_arts(id SERIAL PRIMARY KEY, title VARCHAR(255), txt TEXT,
-             user_id INTEGER NOT NULL, foreign key (user_id) REFERENCES auth_user(id), date DATE NOT NULL)""",
+             preview TEXT, user_id INTEGER NOT NULL, foreign key (user_id) REFERENCES auth_user(id), date DATE NOT NULL)""",
             """CREATE TABLE IF NOT EXISTS web_app_favs(id SERIAL PRIMARY KEY, art_id INTEGER NOT NULL,
              foreign key (art_id) REFERENCES web_app_arts(id), user_id INTEGER NOT NULL, foreign key (user_id)
               REFERENCES auth_user(id))""",

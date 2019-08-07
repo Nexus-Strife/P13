@@ -31,3 +31,7 @@ class CommentsForm(forms.Form):
 
 class TitleForm(forms.Form):
     title = forms.CharField(label="Ecrivez le titre de votre article", max_length=255, widget=forms.TextInput(attrs={'placeholder': 'Ecrivez le titre de votre article', 'class': 'form-control', 'autocomplete': 'off'}))
+
+
+class PreviewForm(forms.Form):
+    preview = forms.CharField(label="Ecrivez une petite preview de votre article", max_length=500, widget=forms.Textarea(attrs={'placeholder': 'Ecrivez une petite preview de votre article', 'class': 'form-control', 'autocomplete': 'off'}))

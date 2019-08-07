@@ -12,7 +12,8 @@
     <title>Votre profil</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
 
     <!-- Custom fonts for this template -->
     <link href="{% static 'vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet" type="text/css">
@@ -24,26 +25,6 @@
     <!-- Custom styles for this template -->
     <link href="{% static 'css/clean-blog.min.css' %}" rel="stylesheet">
     <link href="{% static 'css/custom.css' %}" rel="stylesheet">
-
-    <!-- Load Jquery -->
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-
-
-    <script>
-    $(function() {
-            $(".delete").on("click", function () {
-                $(this).hide();
-                var val = $(this).val();
-                console.log(val);
-                var value;
-                $.ajax({
-                    url: '{% url 'web_app:del_fav' %}',
-                    data: { 'value': val },
-                    dataType: 'json'
-                });
-            });
-        });
-    </script>
 
 </head>
 
@@ -74,14 +55,94 @@
         <div class="col-lg-8 col-md-10 offset-lg-4">
             <p>Vos articles favoris:</p>
         </div>
-        {% for art in lst_fav %}
+        {% for art in favs %}
         <div class="col-lg-8 col-md-10">
-            {{ art.title }}
-        </div><button type="submit" value="{{ art.id }}" class="delete" href="{% url 'web_app:profil' %}">Supprimer</button>
-        <hr>
+            <a href="{% url 'web_app:view_art' art.title %}">{{ art.title }}</a>
+        </div>
+        <button type="submit" value="{{ art.id }}" class="delete">Supprimer</button>
+        <div class="col-lg-12"><hr></div>
         {% csrf_token %}
         {% endfor %}
+        <div class="col-lg-12"><hr></div>
+        <div class="col-lg-8 offset-lg-4">
+            <span class="step-links">
+                {% if favs.has_previous %}
+                <a href="?page=1">&laquo; </a>
+                <a href="?page={{ favs.previous_page_number }}">Précédente</a>
+                {% endif %}
+
+                <span class="current">
+                    Page {{ favs.number }} sur {{ favs.paginator.num_pages }}.
+                </span>
+
+                {% if favs.has_next %}
+                <a href="?page={{ favs.next_page_number }}">Suivante</a>
+                <a href="?page={{ favs.paginator.num_pages }}"> &raquo;</a>
+                {% endif %}
+            </span>
+        </div>
     </div>
 </div>
+<hr>
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-md-10 mx-auto">
+                <ul class="list-inline text-center">
+                    <li class="list-inline-item">
+                        <a href="#">
+                <span class="fa-stack fa-lg">
+                  <i class="fas fa-circle fa-stack-2x"></i>
+                  <i class="fab fa-twitter fa-stack-1x fa-inverse"></i>
+                </span>
+                        </a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a href="#">
+                <span class="fa-stack fa-lg">
+                  <i class="fas fa-circle fa-stack-2x"></i>
+                  <i class="fab fa-facebook-f fa-stack-1x fa-inverse"></i>
+                </span>
+                        </a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a href="#">
+                <span class="fa-stack fa-lg">
+                  <i class="fas fa-circle fa-stack-2x"></i>
+                  <i class="fab fa-github fa-stack-1x fa-inverse"></i>
+                </span>
+                        </a>
+                    </li>
+                </ul>
+                <p class="copyright text-muted">Copyright &copy; Your Website 2019</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- Bootstrap core JavaScript -->
+<!-- Load Jquery -->
+<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+<script>
+    $(function() {
+    $(".delete").on("click", function () {
+        $(this).hide();
+        var val = $(this).val();
+        console.log(val);
+        var value;
+        $.ajax({
+            url: '{% url 'web_app:del_fav' %}',
+            data: { 'value': val },
+            dataType: 'json'
+        });
+    });
+});
+</script>
+<script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+
+<!-- Custom scripts for this template -->
+<script src="{% static 'js/clean-blog.min.js' %}"></script>
+
 </body>
+
 </html>

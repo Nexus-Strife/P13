@@ -12,7 +12,8 @@
     <title>Stars news - L'actualité des étoiles !</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
 
     <!-- Custom fonts for this template -->
     <link href="{% static 'vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet" type="text/css">
@@ -55,12 +56,12 @@
         <div class="col-lg-8 col-md-10 mx-auto">
             {% for art in articles %}
             <div class="post-preview">
-                <a href="{% url 'web_app:view_art' art.title %}">
+                 <a href="{% url 'web_app:view_art' art.title %}">
                     <h2 class="post-title">
                         {{ art.title }}
                     </h2>
                     <h6 class="post-subtitle">
-                        <div class="crop">{{ art.txt|safe }}</div>
+                        <div>{{ art.preview }}</div>
                     </h6>
                 </a>
                 <p class="post-meta">Posted by

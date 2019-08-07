@@ -22,30 +22,9 @@
     <!-- Custom styles for this template -->
     <link href="{% static 'css/clean-blog.min.css' %}" rel="stylesheet">
     <link href="{% static 'css/custom.css' %}" rel="stylesheet">
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
-
 
 
 </head>
-
-<script>
-    $(function() {
-            $(".save").on("click", function () {
-                $(this).hide();
-                var val = $(this).val();
-                console.log(val);
-                var value;
-                $.ajax({
-                    url: '{% url 'web_app:add_fav' %}',
-                    data: { 'value': val },
-                    dataType: 'json',
-                    success: function (data) {
-                        console.log("Enregistré !");
-                    }
-                });
-            });
-        });
-</script>
 
 <body>
 
@@ -62,7 +41,6 @@
             <div class="col-lg-8 col-md-10 mx-auto">
                 <div class="post-heading">
                     <h1>{{ reading_art.title }}</h1>
-                    <div class="crop">{{ reading_art.txt|safe }}</div>
                     <span class="meta">Posted by
               <a href="#">{{ usr.username }}</a>
               le {{ reading_art.date }}</span>
@@ -80,10 +58,16 @@
                 {{ reading_art.title }}
                 {{ reading_art.txt|safe }}
             </div>
-            <div class="col-lg-8 col-md-10 mx-auto">
+            {% if not user.is_authenticated %}
+            <div class="col-lg-8 col-md-10 offset-lg-3">
+                <a href="{% url 'web_app:login' %}">Connectez vous pour ajouter l'article dans vos favoris !</a>
+            </div>
+            {% else %}
+            <div class="col-lg-8 col-md-10 offset-lg-3">
                 Ajoutez cet article en favoris !
                 <button type="submit" value="{{ reading_art.id }}" class="save">Enregistrer</button>
             </div>
+            {% endif %}
         </div>
     </div>
 </article>
@@ -93,16 +77,17 @@
 <div class="container">
     <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
-            <div style="width: 450px; height: 500px; overflow-y: auto;">
+            <div style="width: 700px; height: 500px; overflow-y: auto;">
                 {% for comm in lst_comm %}
                 <div>
-                    <p>Commentaire de {{ comm.username }}:</p>
-                        <em>{{ comm.comments }}</em>
+                    <p>Commentaire de {{ comm.username }}:<br>
+                        <em>{{ comm.comments }}</em></p>
                 </div>
                 {% endfor %}
             </div>
         </div>
     </div>
+    <hr>
     <div class="row">
         <form role="form" method="post" action="{% url 'web_app:add_comm' article %}">
             <div class="col-lg-12 offset-lg-7">
@@ -155,6 +140,25 @@
 
 <!-- Bootstrap core JavaScript -->
 <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+<script>
+    $(function() {
+    $(".save").on("click", function () {
+        $(this).hide();
+        var val = $(this).val();
+        console.log(val);
+        var value;
+        $.ajax({
+            url: '{% url 'web_app:add_fav' %}',
+            data: { 'value': val },
+            dataType: 'json',
+            success: function (data) {
+                console.log("Enregistré !");
+            }
+        });
+    });
+});
+</script>
+
 <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
 
 <!-- Custom scripts for this template -->

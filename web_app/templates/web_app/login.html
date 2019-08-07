@@ -21,6 +21,7 @@
 
     <!-- Custom styles for this template -->
     <link href="{% static 'css/clean-blog.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/custom.css' %}" rel="stylesheet">
 
 </head>
 
@@ -48,35 +49,35 @@
 
 <!-- Main Content -->
 <div class="container">
-     <div class="row">
-            <div class="col-xs-6 col-sm-6 col-md-6 col-sm-offset-2 col-md-offset-4 col-lg-offset-8" id="panel_reg">
-                <div class="panel panel-default" >
-                    <div class="panel-heading">
-                        <h3 class="panel-title" id="panel_title">Identification: </h3>
-                    </div>
-                    <div class="panel-body">
-                        <form role="form" method="post" action="">
-                            {% csrf_token %}
-                            <div class="row">
-                                <div class="col-xs-6 col-sm-6 col-md-6">
-                                    <div class="form-group">
-                                        {{ form.nickname }}
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-xs-6 col-sm-8 col-md-12 col-lg-12">
-                                        <div class="form-group">
-                                            {{ form.password }}
-                                        </div>
-                                    </div>
-                                </div>
-                                <input type="submit" value="Connexion" class="btn btn-info btn-block">
-                            </div>
-                        </form>
+    <div class="row">
+        <div class="col-xs-6 col-sm-6 col-md-8 offset-lg-12 offset-sm-2 offset-md-4">
+            <div class="col-lg-12">
+                <h3 class="offset-lg-2">Identification: </h3>
+            </div>
+            <form role="form" method="post" action="">
+                {% csrf_token %}
+                <div class="row">
+                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-8 offset-lg-0">
+                        <div class="form-group">
+                            {{ form.nickname }}
+                        </div>
                     </div>
                 </div>
-            </div>
+                <div class="row">
+                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-8 offset-lg-0">
+                        <div class="form-group">
+                            {{ form.password }}
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 offset-lg-2">
+                        <input type="submit" value="Connexion" class="btn btn-info">
+                    </div>
+                </div>
+            </form>
         </div>
+
     </div>
 </div>
 

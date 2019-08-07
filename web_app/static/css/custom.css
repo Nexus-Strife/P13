@@ -1,20 +1,9 @@
 .crop {
 width: 570px;
 overflow: hidden;
-height: 60px;
-white-space: nowrap; /* Don't forget this one */
+height: 40px;
 text-overflow: ellipsis;
-display: inline-block;
-}​
-
-
-.sub {
-width: 570px;
-overflow: hidden;
-height: 70px;
 white-space: nowrap; /* Don't forget this one */
-text-overflow: ellipsis;
-display: inline-block;
 }​
 
 .cbtn {
@@ -24,4 +13,41 @@ display: inline-block;
     text-transform: uppercase;
     border-radius: 0;
     font-family: 'Open Sans','Helvetica Neue',Helvetica,Arial,sans-serif;
+}
+
+@media(max-width: 325px) {
+    .page-heading h1 {
+        font-size: 35px !important;
+        }
+    .subheading {
+        font-size: 20px !important;
+    }
+}
+
+@media(min-width: 350px) and (max-width: 380px) {
+    .page-heading h1 {
+        font-size: 35px !important;
+    }
+    .subheading {
+        font-size: 20px !important;
+    }
+}
+
+@media(min-width: 420px) and (max-width: 440px) {
+    .page-heading h1 {
+        font-size: 35px !important;
+    }
+    .subheading {
+        font-size: 20px !important;
+     }
+}
+
+@media(min-width: 760px) and (max-width: 780px) {
+    .page-heading h1 {
+        font-size: 60px !important;
+    }
+
+    .subheading {
+        font-size: 25px !important;
+    }
 }

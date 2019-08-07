@@ -4,7 +4,6 @@ from . import views
 app_name = "web_app"
 urlpatterns = [
     path('', views.index, name='index'),
-    path('post/', views.post_art, name='post'),
     path('contact/', views.contact, name='contact'),
     path('about/', views.about, name='about'),
     path('log_art_post/', views.login_art_post, name='art_logging'),
@@ -17,5 +16,6 @@ urlpatterns = [
     path('add_fav/', views.add_fav, name='add_fav'),
     path('profil/', views.profil, name='profil'),
     path('del_fav/', views.del_fav, name='del_fav'),
+
 
 ]
