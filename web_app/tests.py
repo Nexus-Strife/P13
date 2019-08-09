@@ -86,6 +86,7 @@ class ArtTestCase(TestCase):
         self.txt = "Lorem ipsum dolor sit amet"
         self.user_id = "99"
         self.preview = "Tema tis rolod muspi merol"
+        self.date = "2019-07-29"
 
         art = Arts(title=self.title, txt=self.txt, user_id=self.user_id, date=self.date, preview=self.preview)
         art.save()
