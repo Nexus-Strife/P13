@@ -79,7 +79,7 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql', # Backends disponibles : 'postgresql', 'mysql', 'sqlite3' et 'oracle'
         'NAME': 'vers_linfinie',  # Nom de la base de données
-        'USER': 'nex',
+        'USER': 'postgres',
         'PASSWORD': 'C1li2tn45!',
         'HOST': '',               # Utile si votre base de données est sur une autre machine
         'PORT': '5432',           # ... et si elle utilise un autre port que celui par défaut
