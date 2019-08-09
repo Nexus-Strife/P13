@@ -1,0 +1,17 @@
+language: python
+
+python:
+  - "3.6"
+  
+before_script:
+  - pip install -r requirements.txt
+  - psql -c 'create database vers_linfinie;' -U postgres
+  - python3 manage.py collectstatic
+
+env: DJANGO_SETTINGS_MODULE="vers_linfinie.settings"
+
+services:
+  - postgresql
+
+script:
+  - python3 manage.py test
