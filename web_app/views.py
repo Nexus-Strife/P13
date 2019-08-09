@@ -117,6 +117,7 @@ def write_art(request):
         curr_user = request.user
         staff = curr_user.is_staff
 
+        # Check if the user asking for the page is member of the staff. If not the user is redirected on the index
         if staff == True:
             form = SomeForm()
             formTitle = TitleForm()
