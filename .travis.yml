@@ -5,7 +5,7 @@ python:
   
 before_script:
   - pip install -r requirements.txt
-  - psql -c 'create database vers_linfinie;' -U nex
+  - psql -c 'create database vers_linfinie;' -U postgres
 
 
 env: DJANGO_SETTINGS_MODULE="vers_linfinie.settings"
