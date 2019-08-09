@@ -114,10 +114,17 @@ def write_art(request):
             formprev = PreviewForm()
 
     else:
-        form = SomeForm()
-        formTitle = TitleForm()
-        formprev = PreviewForm()
-    return render(request, "web_app/write_art.html", locals())
+        curr_user = request.user
+        staff = curr_user.is_staff
+
+        if staff == True:
+            form = SomeForm()
+            formTitle = TitleForm()
+            formprev = PreviewForm()
+            return render(request, "web_app/write_art.html", locals())
+
+        else:
+            return redirect('../', locals())
 
 
 def view_art(request, article):
