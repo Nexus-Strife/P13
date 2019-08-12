@@ -35,14 +35,6 @@ def about(request):
     return render(request, "web_app/about.html")
 
 
-def login_art_post(request):
-
-    # Route in progress. Display a login page for admins that give the right to write articles.
-
-    form = LoginForm()
-    return render(request, "web_app/log_art.html", locals())
-
-
 def register(request):
 
     if request.method == 'POST':
@@ -190,4 +182,8 @@ def del_fav(request):
     Favs.objects.filter(id=id).delete()
     data = {'respond': id}
     return JsonResponse(data)
+
+
+def trigger_error(request):
+    div_by_zero = 1 / 0
 

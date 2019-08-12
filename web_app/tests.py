@@ -93,7 +93,13 @@ class ArtTestCase(TestCase):
         art.save()
 
 
+class SentryTestCase(TestCase):
 
+    """Test the route for sentry"""
+
+    def test_route_sentry(self):
+        response = self.client.get(reverse('web_app:error'))
+        self.assertEqual(response.status_code, 500)
 
 
 

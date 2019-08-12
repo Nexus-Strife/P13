@@ -6,7 +6,6 @@ urlpatterns = [
     path('', views.index, name='index'),
     path('contact/', views.contact, name='contact'),
     path('about/', views.about, name='about'),
-    path('log_art_post/', views.login_art_post, name='art_logging'),
     path('register/', views.register, name='register'),
     path('login/', views.login, name='login'),
     path('write/', views.write_art, name='write'),
@@ -16,6 +15,6 @@ urlpatterns = [
     path('add_fav/', views.add_fav, name='add_fav'),
     path('profil/', views.profil, name='profil'),
     path('del_fav/', views.del_fav, name='del_fav'),
-
+    path('error/', views.trigger_error, name='error'),
 
 ]
